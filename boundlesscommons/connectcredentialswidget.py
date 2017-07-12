@@ -30,8 +30,8 @@ from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QWidget, QLabel, QDialogButtonBox, QVBoxLayout
 
-from qgiscommons.iconlineedit import IconLineEdit
-from qgiscommons.passwordlineedit import PasswordLineEdit
+from qgiscommons.gui.iconlineedit import IconLineEdit
+from qgiscommons.gui.passwordlineedit import PasswordLineEdit
 
 iconsPath = os.path.join(os.path.dirname(__file__), "icons")
 
