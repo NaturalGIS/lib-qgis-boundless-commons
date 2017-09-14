@@ -28,7 +28,7 @@ import os
 
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QWidget, QLabel, QDialogButtonBox, QVBoxLayout
+from qgis.PyQt.QtWidgets import QWidget, QLabel, QDialogButtonBox, QVBoxLayout, QCheckBox
 
 from qgiscommons2.gui.iconlineedit import IconLineEdit
 from qgiscommons2.gui.passwordlineedit import PasswordLineEdit
@@ -46,6 +46,9 @@ class ConnectCredentialsWidget(QWidget):
 
         self.lePassword = PasswordLineEdit(self)
 
+        self.chkRemember = QCheckBox(self)
+        self.chkRemember.setText("Remember me")
+
         self.lblResetPassword = QLabel(self)
         self.lblResetPassword.setAlignment(Qt.AlignCenter)
         self.lblResetPassword.setOpenExternalLinks(True)
@@ -61,6 +64,7 @@ class ConnectCredentialsWidget(QWidget):
         self.layout = QVBoxLayout(self)
         self.layout.addWidget(self.leLogin)
         self.layout.addWidget(self.lePassword)
+        self.layout.addWidget(self.chkRemember)
         self.layout.addWidget(self.lblResetPassword)
         self.layout.addWidget(self.lblRegister)
         self.setLayout(self.layout)
@@ -76,3 +80,9 @@ class ConnectCredentialsWidget(QWidget):
 
     def setPassword(self, password):
         self.lePassword.setText(password)
+
+    def remember(self):
+        return self.chkRemember.isChecked()
+
+    def setRemember(self, state):
+        self.chkRemember.setCheckState(state)
