@@ -26,7 +26,7 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from qgis.PyQt.QtCore import Qt
+from qgis.PyQt.QtCore import pyqtSignal, Qt
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QWidget, QLabel, QDialogButtonBox, QVBoxLayout, QCheckBox
 
@@ -37,6 +37,8 @@ iconsPath = os.path.join(os.path.dirname(__file__), "icons")
 
 
 class ConnectCredentialsWidget(QWidget):
+    rememberStateChanged = pyqtSignal(int)
+
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
 
@@ -69,6 +71,9 @@ class ConnectCredentialsWidget(QWidget):
         self.layout.addWidget(self.lblRegister)
         self.setLayout(self.layout)
 
+        self.chkRemember.stateChanged.connect(self.rememberCheckChanged)
+
+
     def login(self):
         return self.leLogin.text()
 
@@ -86,3 +91,6 @@ class ConnectCredentialsWidget(QWidget):
 
     def setRemember(self, state):
         self.chkRemember.setCheckState(state)
+
+    def rememberCheckChanged(self, state):
+        self.rememberStateChanged.emit(state)
